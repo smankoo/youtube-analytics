@@ -13,7 +13,21 @@ YOUTUBE_API_VERSION = "v3"
 DEVELOPER_KEY = os.environ['GOOGLE_API_KEY']
 
 def youtube_search(id=None):
-    youtube_data = []
+
+
+    channelId         = []
+    channelTitle      = []
+    title             = []
+    videoId           = []
+    categoryId        = []
+    publishedAt       = []
+    description       = []
+    favoriteCount     = []
+    viewCount        = []
+    likeCount         = []
+    dislikeCount      = []
+    commentCount    = []
+    tags            = []
 
     youtube = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION,developerKey=DEVELOPER_KEY)
 
@@ -24,34 +38,33 @@ def youtube_search(id=None):
 
     for item in response['items']:
 
-        channelId = item['snippet']['channelId']
-        channelTitle = item['snippet']['channelTitle']
-        title = item['snippet']['title']
-        videoId = item['id']
-        categoryId = item['snippet']['categoryId']
-        publishedAt = item['snippet']['publishedAt']
-        description = item['snippet']['description']
-        favoriteCount = item['statistics']['favoriteCount']
-        viewCount = item['statistics']['viewCount']
-        likeCount = item['statistics']['likeCount']
-        dislikeCount = item['statistics']['dislikeCount']
+        channelId.append(item['snippet']['channelId'])
+        channelTitle.append(item['snippet']['channelTitle'])
+        title.append(item['snippet']['title'])
+        videoId.append(item['id'])
+        categoryId.append(item['snippet']['categoryId'])
+        publishedAt.append(item['snippet']['publishedAt'])
+        description.append(item['snippet']['description'])
+        favoriteCount.append(item['statistics']['favoriteCount'])
+        viewCount.append(item['statistics']['viewCount'])
+        likeCount.append(item['statistics']['likeCount'])
+        dislikeCount.append(item['statistics']['dislikeCount'])
 
         # print(item)
 
         if 'commentCount' in item['statistics'].keys():
-            commentCount = item['statistics']['commentCount']
+            commentCount.append(item['statistics']['commentCount'])
         else:
-            commentCount = ""
+            commentCount.append("")
         
         if 'tags' in item['snippet'].keys():
-            tags = item['snippet']['tags']
+            tags.append(item['snippet']['tags'])
         else:
-            tags = []
+            tags.append([])
     #     pprint.pprint(response)
-        item_dict = {'videoId':videoId,'channelId': channelId,'channelTitle': channelTitle,'tags':tags,'categoryId':categoryId,'title':title,'viewCount':viewCount,'likeCount':likeCount,'dislikeCount':dislikeCount,'commentCount':commentCount,'favoriteCount':favoriteCount, 'publishedAt':publishedAt, 'description':description}
-        youtube_data.append(item_dict)
+    youtube_dict = {'videoId':videoId,'channelId': channelId,'channelTitle': channelTitle,'tags':tags,'categoryId':categoryId,'title':title,'viewCount':viewCount,'likeCount':likeCount,'dislikeCount':dislikeCount,'commentCount':commentCount,'favoriteCount':favoriteCount, 'publishedAt':publishedAt, 'description':description}
 
-    return youtube_data
+    return youtube_dict
 
 
 # youtube_search("Stephen Colbert")

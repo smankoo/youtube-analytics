@@ -5,8 +5,10 @@ package
 
 ## basic
 
+set-credentials.ps1
+
+
 tmp
-*.json
 *.mp4
 
 ### Jupyter ###
@@ -55,4 +57,3 @@ config.rst
 package-lock.json
 geckodriver.log
 
-credentials.json

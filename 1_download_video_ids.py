@@ -3,11 +3,13 @@ import re
 import json
 import os
 
-WORKING_DIR = 'tmp'
+with open ('settings.json', 'rb') as jsonfile:
+    settings = json.load(jsonfile)
+
+WORKING_DIR = settings['WORKING_DIR']
 
 if not os.path.exists(WORKING_DIR):
     os.makedirs(WORKING_DIR)
-
 
 # pl = Playlist('https://www.youtube.com/channel/UCMtFAi84ehTSYSE9XoHefig/videos')
 
@@ -15,7 +17,10 @@ if not os.path.exists(WORKING_DIR):
 
 # pl = Playlist('https://www.youtube.com/channel/UCMtFAi84ehTSYSE9XoHefig/videos')
 
-pl = Playlist('https://www.youtube.com/watch?v=OuNfGc7sM2Y&list=PLpHbno9djTOR4-E0E4O7SbSLgnoRw929p')
+# pl = Playlist('https://www.youtube.com/watch?v=OuNfGc7sM2Y&list=PLpHbno9djTOR4-E0E4O7SbSLgnoRw929p')
+
+# AIB Channel
+pl = Playlist('https://www.youtube.com/user/allindiabakchod/videos')
 
 pl.populate_video_urls()
 
